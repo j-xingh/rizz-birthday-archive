@@ -2,16 +2,440 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { --font-display: Georgia; --font-body: Arial; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: #080707; color: #eee9df; font-family: var(--font-body), Arial, sans-serif; }
-* { box-sizing: border-box; }
-button, input, textarea, select { font: inherit; }
-::selection { background: #702737; color: #eee9df; }
-.texture { background-image: radial-gradient(rgba(238,233,223,.07) .5px, transparent .5px); background-size: 5px 5px; }
-.hero-scene { background-image: linear-gradient(90deg, rgba(8,7,7,.96), rgba(8,7,7,.72) 38%, rgba(8,7,7,.08) 78%), url('/assets/graveyard-hero.png'); background-position: center; background-size: cover; }
-.sigil { background-image: url('/assets/gothic-ui-sigils.png'); background-size: 200% 200%; background-repeat: no-repeat; }
-.sigil-owl { background-position: 0 0; }.sigil-skull { background-position: 100% 0; }.sigil-serpent { background-position: 0 100%; }.sigil-rose { background-position: 100% 100%; }
-.card-art { background-image: url('/assets/message-card-templates.png'); background-size: 200% 200%; background-repeat: no-repeat; }
-.card-envelope { background-position: 0 0; }.card-tarot { background-position: 100% 0; }.card-zine { background-position: 0 100%; }.card-achievement { background-position: 100% 100%; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* =========================================================
+   FONTS
+========================================================= */
+
+:root{
+  --font-display:"Cinzel Decorative",serif;
+  --font-body:"Cormorant Garamond",serif;
+  --font-signature:"Caveat",cursive;
+
+  --bg:#080707;
+  --text:#eee9df;
+
+  /* Dark fountain-pen ink */
+  --paper-ink:#24130b;
+
+  --accent:#8b4053;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  overflow-x:hidden;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+::selection{
+  background:#7b2634;
+  color:#fff;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  font-family:var(--font-display);
+}
+
+.signature{
+  font-family:var(--font-signature);
+}
+
+.font-type{
+  font-family:var(--font-signature);
+}
+
+.letter-author{
+  font-family:var(--font-signature);
+}
+
+.prose{
+  font-family:var(--font-signature);
+  color:var(--paper-ink);
+}
+
+.prose p{
+
+  font-size:1.8rem;
+
+  line-height:2.8rem;
+
+  margin-bottom:1.6rem;
+
+  color:var(--paper-ink);
+
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4{
+
+  font-family:var(--font-signature);
+
+  color:var(--paper-ink);
+
+}
+
+.prose strong{
+
+  color:var(--paper-ink);
+
+  font-weight:700;
+
+}
+
+.prose em{
+
+  color:#5a3424;
+
+}
+
+.prose ul,
+.prose ol{
+
+  margin:1.5rem 0;
+
+  padding-left:2rem;
+
+}
+
+.prose li{
+
+  margin-bottom:.6rem;
+
+}
+
+.prose blockquote{
+
+  border-left:3px solid rgba(70,35,20,.3);
+
+  padding-left:1rem;
+
+  color:#513123;
+
+  font-style:italic;
+
+}
+
+/* =========================================================
+   TEXTURE
+========================================================= */
+
+.texture{
+
+  background-image:
+    radial-gradient(rgba(255,255,255,.04) .5px,transparent .5px);
+
+  background-size:5px 5px;
+
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-scene{
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(8,7,7,.96),
+      rgba(8,7,7,.72) 40%,
+      rgba(8,7,7,.08) 82%
+    ),
+    url('/assets/graveyard-hero.png');
+
+  background-size:cover;
+
+  background-position:center;
+
+}
+/* =========================================================
+   GOTHIC ICONS
+========================================================= */
+
+.sigil{
+
+  background-image:url('/assets/gothic-ui-sigils.png');
+  background-size:200% 200%;
+  background-repeat:no-repeat;
+
+}
+
+.sigil-owl{background-position:0 0;}
+.sigil-skull{background-position:100% 0;}
+.sigil-serpent{background-position:0 100%;}
+.sigil-rose{background-position:100% 100%;}
+
+/* =========================================================
+   ENVELOPES
+========================================================= */
+
+.card-art{
+
+  background-image:url('/assets/message-card-templates.png');
+  background-size:200% 200%;
+  background-repeat:no-repeat;
+
+}
+
+.card-envelope{
+
+  background-position:0 0;
+
+}
+
+.card-tarot{
+
+  background-position:100% 0;
+
+}
+
+.card-zine{
+
+  background-position:0 100%;
+
+}
+
+.card-achievement{
+
+  background-position:100% 100%;
+
+}
+
+/* =========================================================
+   PARCHMENT
+========================================================= */
+
+.parchment{
+
+  background-image:url('/assets/parchment.png');
+
+  background-repeat:no-repeat;
+
+  background-position:center;
+
+  background-size:cover;
+
+  color:var(--paper-ink);
+
+  border-radius:12px;
+
+  box-shadow:
+      0 45px 120px rgba(0,0,0,.55);
+
+}
+
+.parchment hr{
+
+  border:none;
+
+  border-top:1px solid rgba(60,35,20,.18);
+
+  margin:2rem 0;
+
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.parchment::-webkit-scrollbar{
+
+  width:8px;
+
+}
+
+.parchment::-webkit-scrollbar-track{
+
+  background:transparent;
+
+}
+
+.parchment::-webkit-scrollbar-thumb{
+
+  background:#8c6c56;
+
+  border-radius:999px;
+
+}
+
+.parchment{
+
+  scrollbar-width:thin;
+
+}
+
+/* =========================================================
+   SCRAPBOOK
+========================================================= */
+
+.polaroid{
+
+  background:#121212;
+
+  border:1px solid #2d2d2d;
+
+  padding:10px 10px 20px;
+
+  box-shadow:
+      0 20px 45px rgba(0,0,0,.45);
+
+  transition:
+      transform .35s ease,
+      box-shadow .35s ease;
+
+  cursor:pointer;
+
+}
+
+.polaroid:hover{
+
+  transform:
+      translateY(-10px)
+      rotate(0deg)
+      scale(1.03) !important;
+
+  box-shadow:
+      0 35px 70px rgba(0,0,0,.65);
+
+}
+
+.polaroid img{
+
+  width:100%;
+
+  display:block;
+
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+.fade-up{
+
+  animation:fadeUp .7s ease forwards;
+
+}
+
+@keyframes fadeUp{
+
+  from{
+
+    opacity:0;
+
+    transform:translateY(30px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+  }
+
+}
+
+.float{
+
+  animation:float 6s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+  0%{
+
+    transform:translateY(0);
+
+  }
+
+  50%{
+
+    transform:translateY(-8px);
+
+  }
+
+  100%{
+
+    transform:translateY(0);
+
+  }
+
+}
+
+/* =========================================================
+   DIALOG
+========================================================= */
+
+.dialog-backdrop{
+
+  backdrop-filter:blur(10px);
+
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+a{
+
+  transition:.25s ease;
+
+}
+
+a:hover{
+
+  opacity:.75;
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion:reduce){
+
+  html{
+
+    scroll-behavior:auto;
+
+  }
+
+  *{
+
+    animation:none !important;
+
+    transition:none !important;
+
+  }
+
+}
