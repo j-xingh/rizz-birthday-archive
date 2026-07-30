@@ -1,0 +1,17 @@
+'use client';
+import { useState } from 'react';
+
+interface ContributionPortalProps {}
+export function ContributionPortal(_: Readonly<ContributionPortalProps>) {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [feedback, setFeedback] = useState('');
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault(); setStatus('sending'); setFeedback('Saving your message…');
+    const response = await fetch('/api/letters', { method: 'POST', body: new FormData(event.currentTarget) });
+    const result = await response.json();
+    if (!response.ok) { setStatus('error'); setFeedback(result.error ?? 'Something went wrong. Please try again.'); return; }
+    event.currentTarget.reset(); setStatus('success'); setFeedback('Your message is saved. Rizz will see it in her Birthday Archive. You can close this page now.');
+  }
+  return <main className="min-h-screen bg-[radial-gradient(circle_at_100%_0,#30151c,transparent_36%),#0b0a0a] px-5 py-20 md:px-14"><div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[.8fr_1.2fr]"><section><p className="text-xs font-bold tracking-[.18em] text-[#c8929b]">A MESSAGE FOR RIZZ</p><h1 className="mt-5 font-display text-5xl leading-tight md:text-7xl">Write something<br/><span className="text-[#c8929b]">she will love.</span></h1><p className="mt-6 max-w-md leading-8 text-bone/70">Leave a birthday note, a memory, and an optional photo, meme, or GIF. Once you press save, it goes straight into Rizz’s Birthday Archive.</p></section><form onSubmit={submit} className="grid gap-5 border border-bone/20 bg-black/20 p-6 md:p-10"><Field label="Your name or nickname"><input required name="name" maxLength={45} placeholder="e.g. midnight.exe" /></Field><Field label="Your message for Rizz"><textarea required name="message" maxLength={1000} placeholder="Tell Rizz something you want her to remember…" /></Field><Field label="A favourite memory (optional)"><textarea name="memory" maxLength={500} placeholder="A moment that still makes you smile…" /></Field><div className="grid gap-5 sm:grid-cols-2"><Field label="Photo, GIF, or meme (optional)"><input name="media" type="file" accept="image/*,.gif" /></Field><Field label="Song or video link (optional)"><input name="link" type="url" placeholder="https://" /></Field></div><Field label="Choose a card style"><select name="style" defaultValue="envelope"><option value="envelope">Black envelope</option><option value="tarot">Tarot card</option><option value="zine">Punk zine</option><option value="achievement">Game achievement</option></select></Field><button disabled={status === 'sending'} className="w-fit bg-bone px-5 py-3 text-xs font-bold tracking-[.14em] text-ink disabled:opacity-60">{status === 'sending' ? 'SAVING…' : 'SAVE YOUR MESSAGE ✦'}</button><p aria-live="polite" className={status === 'error' ? 'text-sm text-red-300' : 'text-sm text-[#c8929b]'}>{feedback}</p></form></div></main>;
+}
+function Field({ label, children }: Readonly<{ label: string; children: React.ReactNode }>) { return <label className="grid gap-2 text-[10px] font-bold tracking-[.13em] text-bone/80"><span>{label}</span><span className="[&>input]:w-full [&>input]:border [&>input]:border-bone/20 [&>input]:bg-ink [&>input]:p-3 [&>textarea]:min-h-32 [&>textarea]:w-full [&>textarea]:border [&>textarea]:border-bone/20 [&>textarea]:bg-ink [&>textarea]:p-3 [&>select]:w-full [&>select]:border [&>select]:border-bone/20 [&>select]:bg-ink [&>select]:p-3">{children}</span></label>; }

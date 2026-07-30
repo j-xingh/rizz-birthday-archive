@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --font-display: Georgia; --font-body: Arial; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #080707; color: #eee9df; font-family: var(--font-body), Arial, sans-serif; }
+* { box-sizing: border-box; }
+button, input, textarea, select { font: inherit; }
+::selection { background: #702737; color: #eee9df; }
+.texture { background-image: radial-gradient(rgba(238,233,223,.07) .5px, transparent .5px); background-size: 5px 5px; }
+.hero-scene { background-image: linear-gradient(90deg, rgba(8,7,7,.96), rgba(8,7,7,.72) 38%, rgba(8,7,7,.08) 78%), url('/assets/graveyard-hero.png'); background-position: center; background-size: cover; }
+.sigil { background-image: url('/assets/gothic-ui-sigils.png'); background-size: 200% 200%; background-repeat: no-repeat; }
+.sigil-owl { background-position: 0 0; }.sigil-skull { background-position: 100% 0; }.sigil-serpent { background-position: 0 100%; }.sigil-rose { background-position: 100% 100%; }
+.card-art { background-image: url('/assets/message-card-templates.png'); background-size: 200% 200%; background-repeat: no-repeat; }
+.card-envelope { background-position: 0 0; }.card-tarot { background-position: 100% 0; }.card-zine { background-position: 0 100%; }.card-achievement { background-position: 100% 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
